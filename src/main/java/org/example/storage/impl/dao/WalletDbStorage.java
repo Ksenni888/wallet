@@ -1,6 +1,7 @@
 package org.example.storage.impl.dao;
 
 import lombok.RequiredArgsConstructor;
+import org.example.exceptions.WalletZeroException;
 import org.example.model.Wallet;
 import org.example.storage.interfaces.WalletStorage;
 import org.springframework.context.annotation.Primary;
@@ -27,9 +28,10 @@ public class WalletDbStorage implements WalletStorage{
             jdbcTemplate.update("UPDATE wallet SET amount = ?, operation_type = ? WHERE wallet_id = ?", amount, wallet.getOperationType(), wallet.getId());
         }
         if ("WITHDRAW".equals(wallet.getOperationType().toString())) {
-            amount = amount - wallet.getAmount();
+            if (wallet.getAmount()>amount){throw new WalletZeroException("Balance 0.0");}
+          else {  amount = amount - wallet.getAmount();
             jdbcTemplate.update("UPDATE wallet SET amount = ?, operation_type = ? WHERE wallet_id = ?", amount, wallet.getOperationType(), wallet.getId());
-        }
+        }}
         return amount;
     }
 

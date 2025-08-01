@@ -6,9 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import javax.validation.constraints.NotBlank;
-
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,5 +15,4 @@ public class Wallet {
     int id;
     String operationType;
     Double amount;
-
 }

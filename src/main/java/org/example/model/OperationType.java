@@ -4,7 +4,6 @@ public enum OperationType {
     DEPOSIT,
     WITHDRAW;
 
-
     public static boolean findByName(String name) {
         boolean result = false;
         for (OperationType type : values()) {

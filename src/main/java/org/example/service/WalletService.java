@@ -25,30 +25,28 @@ public class WalletService {
         return walletDbStorage.getBalance(id);
     }
 
-
     private void validateIdWallet(int id) {
         if (id <= 0) {
-            throw new WalletNotFoundException("Неправильный номер кошелька.");
+            throw new WalletNotFoundException("Wrong wallet's number.");
         }
         if (!walletDbStorage.findWalletId(id)) {
-            throw new WalletNotFoundException(String.format("Кошелек с id = \"%d\" не найден", id));
+            throw new WalletNotFoundException(String.format("Wallet with id = \"%d\" not found", id));
         }
     }
     private void validateWallet(Wallet wallet) {
         validateIdWallet(wallet.getId());
         if (wallet.getOperationType() == null) {
-            throw new WalletValidationException("В запросе отсутствует название операции - operation type - DEPOSIT/WITHDRAW");
+            throw new WalletValidationException("The operation name is missing in the request (operation type: DEPOSIT/WITHDRAW)");
         }
         if (wallet.getOperationType().isBlank()) {
-            throw new WalletValidationException("В запросе отсутствует название операции - operation type - DEPOSIT/WITHDRAW");
+            throw new WalletValidationException("The operation name is missing in the request (operation type: DEPOSIT/WITHDRAW)");
         }
         if (!OperationType.findByName(wallet.getOperationType())) {
-            throw new WalletValidationException("В запросе отсутствует название операции - operation type - DEPOSIT/WITHDRAW");
+            throw new WalletValidationException("The operation name is missing in the request (operation type: DEPOSIT/WITHDRAW)");
         }
 
         if ((wallet.getAmount() <= 0)) {
-            throw new WalletValidationException("Cумма для проведения операции не может быть меньше 0");
+            throw new WalletValidationException("The amount for the operation cannot be less than 0");
         }
-
     }
 }

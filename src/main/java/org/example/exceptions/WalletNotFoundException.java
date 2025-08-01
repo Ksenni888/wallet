@@ -5,5 +5,3 @@ public class WalletNotFoundException extends RuntimeException{
         super(message);
     }
 }
-
-

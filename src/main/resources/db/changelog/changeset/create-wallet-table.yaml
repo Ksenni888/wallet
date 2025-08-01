@@ -1,0 +1,37 @@
+#databaseChangeLog:
+#  - changeSet: id: users-table-1 author: root
+#changes:
+#  - createTable: tableName: users
+#columns:
+#  - column: name: id type: int constraints: primaryKey: true nullable: false
+#  - column: name: name type: varchar(50) constraints: nullable: false
+#  - column: name: email type: varchar(128) constraints: nullable: false unique: true
+
+
+
+
+databaseChangeLog:
+  - changeSet:
+     id: author
+     author: wallets
+changes:
+  - createTable:
+    tableName: wallet
+columns:
+  - column:
+    name: id
+    type: int
+    autoIncrement: true
+    constraints:
+    primaryKey: true
+    nullable: false
+  - column:
+    name: operation_type
+    type: varchar(50)
+    constraints:
+    nullable: false
+  - column:
+    name: amount
+    type: DOUBLE PRECISION
+
+

@@ -1,0 +1,1 @@
+INSERT INTO wallet (wallet_id, operation_type, amount) values ( 1, 'DEPOSIT', 200);

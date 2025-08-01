@@ -27,11 +27,11 @@ public class WalletDbStorage implements WalletStorage{
             amount = amount + wallet.getAmount();
             jdbcTemplate.update("UPDATE wallet SET amount = ?, operation_type = ? WHERE wallet_id = ?", amount, wallet.getOperationType(), wallet.getId());
         }
-        if ("WITHDRAW".equals(wallet.getOperationType().toString())) {
+        if ("WITHDRAW".equals(wallet.getOperationType())) {
             if (wallet.getAmount()>amount){throw new WalletZeroException("Balance 0.0");}
-          else {  amount = amount - wallet.getAmount();
-            jdbcTemplate.update("UPDATE wallet SET amount = ?, operation_type = ? WHERE wallet_id = ?", amount, wallet.getOperationType(), wallet.getId());
-        }}
+            else {  amount = amount - wallet.getAmount();
+                jdbcTemplate.update("UPDATE wallet SET amount = ?, operation_type = ? WHERE wallet_id = ?", amount, wallet.getOperationType(), wallet.getId());
+            }}
         return amount;
     }
 

@@ -1,26 +1,24 @@
 version: '24.0.7'
 services:
 
-  wallet:
-    image: postgres
-    container_name: "wallet"
-    ports:
-      - "5432:5432"
+  db:
+    image: postgres:13.7-alpine
+    volumes:
+      - /var/lib/postgresql/data
     environment:
       - POSTGRES_DB=wallet
       - POSTGRES_USER=wallets
       - POSTGRES_PASSWORD=pass
 
   web:
-    build:
-    image: wallet-image
-    container_name: wallet
+    build: .
     ports:
       - "8080:8080"
     depends_on:
-      - wallet
+      - db
     environment:
-      - POSTGRES_DB=wallet
+      - DB_NAME=wallet
       - POSTGRES_USER=wallets
       - POSTGRES_PASSWORD=pass
+      - DB_HOST=db
       - DB_PORT=5432

@@ -37,7 +37,6 @@ public class WalletDbStorage implements WalletStorage{
     public double getBalance(int id) {
         String sqlGetAmount =
                 String.format("SELECT amount FROM wallet WHERE wallet_id = %d", id);
-        System.out.println(id);
         return Double.parseDouble(String.valueOf(jdbcTemplate.queryForObject(sqlGetAmount, BigDecimal.class)));
     }
 

@@ -9,6 +9,7 @@ import org.example.model.Wallet;
 import org.example.storage.impl.dao.WalletDbStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class WalletService {
     @Autowired
     private WalletDbStorage walletDbStorage;
+    @Transactional
     public double changeBalance(Wallet wallet){
         validateWallet(wallet);
         return walletDbStorage.changeBalance(wallet);

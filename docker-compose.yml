@@ -1,24 +1,21 @@
 version: '24.0.7'
 services:
+  app:
+   build: .
+   ports:
+     - "8080:8080"
+   environment:
+     - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/wallet
+     - SPRING_DATASOURCE_USERNAME=wallets
+     - SPRING_DATASOURCE_PASSWORD=pass
+   depends_on:
+     - db
 
   db:
-    image: postgres:13.7-alpine
-    volumes:
-      - /var/lib/postgresql/data
+    image: postgres:13
+    ports:
+      - "5432"
     environment:
       - POSTGRES_DB=wallet
       - POSTGRES_USER=wallets
       - POSTGRES_PASSWORD=pass
-
-  web:
-    build: .
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
-    environment:
-      - DB_NAME=wallet
-      - POSTGRES_USER=wallets
-      - POSTGRES_PASSWORD=pass
-      - DB_HOST=db
-      - DB_PORT=5432

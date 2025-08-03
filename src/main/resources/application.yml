@@ -2,7 +2,7 @@ spring:
   liquibase:
     enabled: true
   datasource:
-    url: jdbc:postgresql://wallet:5432/wallet
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
     username: wallets
     password: pass
   jpa:

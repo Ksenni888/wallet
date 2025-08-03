@@ -21,5 +21,3 @@ columns:
   - column:
     name: amount
     type: DOUBLE PRECISION
-
-
